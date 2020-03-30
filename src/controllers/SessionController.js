@@ -4,10 +4,13 @@ const crypto = require('crypto');
 
 module.exports = {
     async create(request, response){
-        const { id } = request.body;
+        const { email, password } = request.body;
 
         const user = await connection('users')
-            .where('id', id)
+            .where({
+                email: email,
+                password: password
+            })
             .select('name')
             .first();
 
